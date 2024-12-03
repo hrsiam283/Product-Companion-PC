@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/entry"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Product Name Spinner -->
+    <TextView
+        android:id="@+id/product_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Product Name"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp" />
+
+    <Spinner
+        android:id="@+id/spinner_product_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- Product Quantity EditText -->
+    <TextView
+        android:id="@+id/product_quantity_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Product Quantity (pc)"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/edit_text_quantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="Enter quantity"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Date and Time TextView -->
+    <TextView
+        android:id="@+id/date_time_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current Date and Time"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/text_view_date_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date and Time will appear here"
+        android:textSize="14sp"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Submit Button -->
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp" />
+</LinearLayout>

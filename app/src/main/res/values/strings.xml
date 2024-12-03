@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">PC</string>
+    <string-array name="product_names">
+        <item>WN</item>
+        <item>WL</item>
+        <item>W</item>
+        <item>DC</item>
+        <item>D</item>
+        <item>DBLT</item>
+        <item>C</item>
+        <item>Wm</item>
+        <item>FL</item>
+        <item>R</item>
+        <item>PD</item>
+        <item>BW</item>
+    </string-array>
+</resources>
