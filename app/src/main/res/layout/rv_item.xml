@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <!-- Heading Row for Column Names -->
+
+
+    <!-- Data Rows -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:weightSum="4">
+
+        <!-- First TextView: Product Type -->
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#CCA2A2"
+            android:fontFamily="sans-serif-black"
+            android:padding="8dp"
+            android:text="Product Type"
+            android:textColor="#090B01"
+            android:textSize="16sp" />
+
+        <!-- Second TextView: Quantity -->
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#CCA2A2"
+            android:fontFamily="sans-serif-black"
+            android:padding="8dp"
+            android:text="Quantity"
+            android:textColor="#090B01"
+            android:textSize="16sp" />
+
+        <!-- Third TextView: Additional Info (e.g., Price or Description) -->
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#CCA2A2"
+            android:fontFamily="sans-serif-black"
+            android:padding="8dp"
+            android:text="Additional Info"
+            android:textColor="#090B01"
+            android:textSize="16sp" />
+
+        <!-- Fourth TextView: Additional Info -->
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#CCA2A2"
+            android:fontFamily="sans-serif-black"
+            android:padding="8dp"
+            android:text="Additional Info"
+            android:textColor="#090B01"
+            android:textSize="16sp" />
+    </LinearLayout>
+</LinearLayout>

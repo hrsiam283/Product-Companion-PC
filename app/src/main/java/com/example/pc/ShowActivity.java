@@ -2,17 +2,24 @@ package com.example.pc;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
 
 public class ShowActivity extends AppCompatActivity {
 
@@ -21,10 +28,10 @@ public class ShowActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show);
 
-        // Find the TextView to display data
-        TextView textView = findViewById(R.id.showdata);
+        RecyclerView recyclerView = findViewById(R.id.recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Set up Firebase reference to "products"
+        List<Product> productList = new ArrayList<>();
         DatabaseReference database = FirebaseDatabase.getInstance().getReference("products");
 
         // Retrieve all products without limiting
@@ -35,26 +42,32 @@ public class ShowActivity extends AppCompatActivity {
                 if (snapshot.exists()) {
                     // Iterate over the child nodes (all products in this case)
                     for (DataSnapshot productSnapshot : snapshot.getChildren()) {
-                        String key = productSnapshot.getKey();
-                        Log.d("ProductSnapshot", "Raw data: " + productSnapshot.getValue());
                         String productType = productSnapshot.child("product_type").getValue(String.class);
                         Integer quantity = productSnapshot.child("quantity").getValue(Integer.class);
-                        textView.append(productType+"\n");
+                        String inOutStatus = productSnapshot.child("inOutStatus").getValue(String.class);
+                        Long timestamp = productSnapshot.child("timestamp").getValue(Long.class); // Get the timestamp from Firebase
 
+                        // Convert the timestamp to Date
+                        Date date = new Date(timestamp);
 
+                        // Format the date to Bangladesh Time (BST, UTC+6)
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        sdf.setTimeZone(TimeZone.getTimeZone("Asia/Dhaka"));
 
+                        // Convert the Date to a formatted string
+                        String formattedDate = sdf.format(date);
+                        Log.d("inOutStatus", "onDataChange: "+quantity );
 
-//                         textView.append(y);
-//                        textView.append(product);
-//
-//                        if (product != null) {
-//                            // Display the product data in your TextView
-//                            String productData = "Product Type: " + product.getProduct_type() + "\n" +
-//                                    "Quantity: " + product.getQuantity() + "\n\n";
-//                            // Append product data to the TextView
-//                            textView.append(productData);
-//                        }
+                        // Create a new Product object and add it to the product list
+                        productList.add(new Product(productType, quantity, inOutStatus, formattedDate));
                     }
+
+                    // Log the size of the product list after adding products
+                    Log.d("ProductListSize", "Size of productList: " + productList.size());
+
+                    // Set the RecyclerView adapter after the product list is populated
+                    recyclerView.setAdapter(new MyAdapter(getApplicationContext(), productList));
+
                 } else {
                     // Show a message if no data is found
                     Toast.makeText(ShowActivity.this, "No products found", Toast.LENGTH_SHORT).show();
