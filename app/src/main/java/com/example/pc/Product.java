@@ -5,13 +5,19 @@ public class Product {
     private int quantity;
     private String inOutStatus; // IN/OUT status
     private String date; // New field for storing date
+    private String productKey;
 
     // Constructor
-    public Product(String product_type, int quantity, String inOutStatus, String date) {
+    public Product(String product_type, int quantity, String inOutStatus, String date,String productKey) {
         this.product_type = product_type;
         this.quantity = quantity;
         this.inOutStatus = inOutStatus;
         this.date = date; // Assigning the date value
+        this.productKey = productKey;
+    }
+
+    public String getProductKey() {
+        return productKey;
     }
 
     // Setter and Getter methods

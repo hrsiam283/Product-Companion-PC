@@ -181,11 +181,12 @@ public class EntryActivity extends AppCompatActivity {
         DatabaseReference database = FirebaseDatabase.getInstance().getReference("products");
 
         // Create Product object
-        Product product = new Product(productName, Integer.parseInt(quantity), inOutSelection,dateTime);
 
         // Add timestamp using Firebase's ServerValue.TIMESTAMP
         String productKey = database.push().getKey();
         assert productKey != null;
+        Product product = new Product(productName, Integer.parseInt(quantity), inOutSelection,dateTime,productKey);
+
         database.child(productKey).setValue(product);
 
         // Save timestamp separately (if needed)

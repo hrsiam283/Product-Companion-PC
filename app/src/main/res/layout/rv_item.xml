@@ -68,4 +68,75 @@
             android:textColor="#090B01"
             android:textSize="12sp" />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:weightSum="4">
+
+        <!-- First TextView: Product Type -->
+        <EditText
+            android:id="@+id/edit_t1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#CCA2A2"
+            android:fontFamily="sans-serif-black"
+            android:padding="8dp"
+            android:text="Product Type"
+            android:textColor="#090B01"
+            android:textSize="12sp"
+            android:visibility="gone"/>
+
+        <!-- Second TextView: Quantity -->
+        <EditText
+            android:id="@+id/edit_t2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#CCA2A2"
+            android:fontFamily="sans-serif-black"
+            android:padding="8dp"
+            android:text="Quantity"
+            android:textColor="#090B01"
+            android:textSize="12sp"
+            android:visibility="gone"/>
+
+        <!-- Third TextView: Additional Info (e.g., Price or Description) -->
+        <EditText
+            android:id="@+id/edit_t3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#CCA2A2"
+            android:fontFamily="sans-serif-black"
+            android:padding="8dp"
+            android:text="Additional Info"
+            android:textColor="#090B01"
+            android:textSize="12sp"
+            android:visibility="gone"/>
+
+        <!-- Fourth TextView: Additional Info -->
+        <EditText
+            android:id="@+id/edit_t4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#CCA2A2"
+            android:fontFamily="sans-serif-black"
+            android:padding="8dp"
+            android:text="Additional Info"
+            android:textColor="#090B01"
+            android:textSize="12sp"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Save"
+            android:visibility="gone" />
+    </LinearLayout>
 </LinearLayout>
