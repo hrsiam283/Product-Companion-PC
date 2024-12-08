@@ -45,21 +45,12 @@ public class ShowActivity extends AppCompatActivity {
                         String productType = productSnapshot.child("product_type").getValue(String.class);
                         Integer quantity = productSnapshot.child("quantity").getValue(Integer.class);
                         String inOutStatus = productSnapshot.child("inOutStatus").getValue(String.class);
-                        Long timestamp = productSnapshot.child("timestamp").getValue(Long.class); // Get the timestamp from Firebase
+                        String timestamp = productSnapshot.child("date").getValue(String.class); // Get the timestamp from Firebase
+                        Log.d("TimestampD", "Timestamp from Firebase: " + timestamp);
 
                         // Convert the timestamp to Date
-                        Date date = new Date(timestamp);
 
-                        // Format the date to Bangladesh Time (BST, UTC+6)
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                        sdf.setTimeZone(TimeZone.getTimeZone("Asia/Dhaka"));
-
-                        // Convert the Date to a formatted string
-                        String formattedDate = sdf.format(date);
-                        Log.d("inOutStatus", "onDataChange: "+quantity );
-
-                        // Create a new Product object and add it to the product list
-                        productList.add(new Product(productType, quantity, inOutStatus, formattedDate));
+                        productList.add(new Product(productType, quantity, inOutStatus, timestamp));
                     }
 
                     // Log the size of the product list after adding products

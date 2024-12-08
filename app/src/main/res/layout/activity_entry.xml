@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -62,23 +61,26 @@
         android:background="@android:color/holo_orange_light"
         android:layout_marginBottom="16dp" />
 
-    <!-- Date and Time TextView -->
-    <TextView
-        android:id="@+id/date_time_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Current Date and Time"
-        android:textSize="16sp"
-        android:textColor="#3F51B5"
-        android:layout_marginBottom="8dp" />
+    <!-- Date Selection -->
 
     <TextView
-        android:id="@+id/text_view_date_time"
+        android:id="@+id/date_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Date and Time will appear here"
-        android:textSize="14sp"
-        android:textColor="#000000"
+        android:text="Select Date"
+        android:textSize="16sp"
+        android:textColor="#3F51B5"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/text_view_date_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Select date"
+        android:focusable="false"
+        android:clickable="true"
+        android:background="@android:color/holo_blue_light"
         android:layout_marginBottom="16dp" />
 
     <!-- Submit Button -->

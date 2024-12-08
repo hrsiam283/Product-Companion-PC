@@ -1,5 +1,6 @@
 package com.example.pc;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,6 +22,7 @@ import com.google.firebase.database.ServerValue;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -29,6 +31,7 @@ public class EntryActivity extends AppCompatActivity {
     private Spinner spinnerProductName;
     private Spinner spinnerInOut; // New Spinner for IN/OUT
     private EditText editTextQuantity;
+    private EditText text_view_date_time;
     private TextView textViewDateTime;
 
     @Override
@@ -44,9 +47,11 @@ public class EntryActivity extends AppCompatActivity {
         spinnerInOut = findViewById(R.id.spinner_in_out); // Initialize IN/OUT Spinner
         editTextQuantity = findViewById(R.id.edit_text_quantity);
         textViewDateTime = findViewById(R.id.text_view_date_time);
+        text_view_date_time =findViewById(R.id.text_view_date_time);
+        text_view_date_time.setOnClickListener(v -> setDateTime());
 
         // Set current date and time
-        setDateTime();
+//        setDateTime();
 
         // Product name spinner setup
         ArrayList<String> productNames = new ArrayList<>();
@@ -102,9 +107,24 @@ public class EntryActivity extends AppCompatActivity {
 
     // Method to set current date and time
     private void setDateTime() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-        String currentDateAndTime = sdf.format(new Date());
-        textViewDateTime.setText(currentDateAndTime);
+        // Get current date
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        // Create DatePickerDialog with the current date
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                (view, selectedYear, selectedMonth, selectedDay) -> {
+                    // Format the selected date and set it to the EditText
+                    String selectedDate = selectedDay + "/" + (selectedMonth + 1) + "/" + selectedYear;
+                    text_view_date_time.setText(selectedDate);
+                },
+                year, month, day);
+
+        // Show the DatePickerDialog
+        datePickerDialog.show();
     }
 
     // Method to handle form submission
@@ -145,6 +165,7 @@ public class EntryActivity extends AppCompatActivity {
         String productName = spinnerProductName.getSelectedItem().toString();
         String inOutSelection = spinnerInOut.getSelectedItem().toString(); // Get IN/OUT selection
         String quantity = editTextQuantity.getText().toString();
+        String dateTime = textViewDateTime.getText().toString();
 
         // Validate form fields
         if (productName.isEmpty()) {
@@ -160,7 +181,7 @@ public class EntryActivity extends AppCompatActivity {
         DatabaseReference database = FirebaseDatabase.getInstance().getReference("products");
 
         // Create Product object
-        Product product = new Product(productName, Integer.parseInt(quantity), inOutSelection,"");
+        Product product = new Product(productName, Integer.parseInt(quantity), inOutSelection,dateTime);
 
         // Add timestamp using Firebase's ServerValue.TIMESTAMP
         String productKey = database.push().getKey();
