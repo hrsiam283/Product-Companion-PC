@@ -27,7 +27,7 @@
             android:padding="8dp"
             android:text="Product Type"
             android:textColor="#090B01"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
         <!-- Second TextView: Quantity -->
         <TextView
@@ -40,7 +40,7 @@
             android:padding="8dp"
             android:text="Quantity"
             android:textColor="#090B01"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
         <!-- Third TextView: Additional Info (e.g., Price or Description) -->
         <TextView
@@ -53,7 +53,7 @@
             android:padding="8dp"
             android:text="Additional Info"
             android:textColor="#090B01"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
         <!-- Fourth TextView: Additional Info -->
         <TextView
@@ -66,6 +66,6 @@
             android:padding="8dp"
             android:text="Additional Info"
             android:textColor="#090B01"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
     </LinearLayout>
 </LinearLayout>
