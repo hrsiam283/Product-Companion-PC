@@ -92,7 +92,7 @@ public class ShowActivity extends AppCompatActivity {
                                     String productKey = product.getProductKey();
 
                                     // Create a new Product object with updated values
-                                    Product updatedProduct = new Product(updatedProductType, Integer.parseInt(updatedQuantity), updatedAdditionalInfo1, updatedAdditionalInfo2,productKey);
+                                    Product updatedProduct = new Product(updatedProductType, Integer.parseInt(updatedQuantity), updatedAdditionalInfo2, updatedAdditionalInfo1,productKey);
 
                                     // Update the product in the list
                                     productList.set(position, updatedProduct);

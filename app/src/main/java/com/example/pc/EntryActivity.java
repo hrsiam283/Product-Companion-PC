@@ -11,14 +11,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.ViewCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,6 +37,7 @@ public class EntryActivity extends AppCompatActivity {
     private EditText editTextQuantity;
     private EditText text_view_date_time;
     private TextView textViewDateTime;
+    private TextView recent1,recent2,recent3,recent4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +54,38 @@ public class EntryActivity extends AppCompatActivity {
         textViewDateTime = findViewById(R.id.text_view_date_time);
         text_view_date_time =findViewById(R.id.text_view_date_time);
         text_view_date_time.setOnClickListener(v -> setDateTime());
+        recent1=findViewById(R.id.recent1);
+        recent2=findViewById(R.id.recent2);
+        recent3=findViewById(R.id.recent3);
+        recent4=findViewById(R.id.recent4);
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference("products");
+        database.orderByChild("timestamp").limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    DataSnapshot lastProductSnapshot = snapshot.getChildren().iterator().next();
+                    String productType = lastProductSnapshot.child("product_type").getValue(String.class);
+                    Integer quantity = lastProductSnapshot.child("quantity").getValue(Integer.class);
+                    String inOutStatus = lastProductSnapshot.child("inOutStatus").getValue(String.class);
+                    String date = lastProductSnapshot.child("date").getValue(String.class);
+                    recent1.setText(productType);
+                    recent2.setText(String.valueOf(quantity)+" pc");
+                    recent3.setText(date);
+                    recent4.setText(inOutStatus);
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
 
         // Set current date and time
 //        setDateTime();
@@ -96,6 +133,10 @@ public class EntryActivity extends AppCompatActivity {
         // Submit button setup
         Button submitButton = findViewById(R.id.submit_button);
         submitButton.setOnClickListener(v -> handleFormSubmit());
+
+
+
+
 
         // Handle window insets for system bars
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.entry), (v, insets) -> {
@@ -195,6 +236,30 @@ public class EntryActivity extends AppCompatActivity {
         // Display a message with the form data
         String message = "Product: " + productName + "\nQuantity: " + quantity + "\nIN/OUT: " + inOutSelection;
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+
+        database.orderByChild("timestamp").limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    DataSnapshot lastProductSnapshot = snapshot.getChildren().iterator().next();
+                    String productType = lastProductSnapshot.child("product_type").getValue(String.class);
+                    Integer quantity = lastProductSnapshot.child("quantity").getValue(Integer.class);
+                    String inOutStatus = lastProductSnapshot.child("inOutStatus").getValue(String.class);
+                    String date = lastProductSnapshot.child("date").getValue(String.class);
+                    recent1.setText(productType);
+                    recent2.setText(String.valueOf(quantity)+" pc");
+                    recent3.setText(date);
+                    recent4.setText(inOutStatus);
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         // Reset the form
         editTextQuantity.setText("");
